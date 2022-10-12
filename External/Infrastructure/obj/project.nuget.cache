@@ -1,23 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4UR1kXesjDyXbbhzgtz9IGYjEONfsa1s+6WqYx/p2ClPZfPnkF2WrVKteLcaxqPZxJV1A2vZWrPorT69rHOEoQ==",
+  "dgSpecHash": "2wtiNlFzQV9/bYdGapastv6Z3UmXe97dIxqi9knUDJQkv8APUb134l4X7ELbQHbqEsi1mvMJV4OBJB8Q7vgjYQ==",
   "success": true,
   "projectFilePath": "c:\\dev\\my_projects\\url-shortener\\External\\Infrastructure\\Infrastructure.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\mnia\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.2\\pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\stackexchange.redis\\2.6.66\\stackexchange.redis.2.6.66.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.diagnostics.performancecounter\\5.0.0\\system.diagnostics.performancecounter.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.security.permissions\\5.0.0\\system.security.permissions.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
-    "C:\\Users\\mnia\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

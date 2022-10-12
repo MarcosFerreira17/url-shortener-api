@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\dev\\my_projects\\url-shortener\\External\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\dev\\my_projects\\url-shortener\\Tests\\Unit.Tests\\Unit.Tests.csproj": {}
   },
   "projects": {
-    "c:\\dev\\my_projects\\url-shortener\\External\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\dev\\my_projects\\url-shortener\\Tests\\Unit.Tests\\Unit.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\dev\\my_projects\\url-shortener\\External\\Infrastructure\\Infrastructure.csproj",
-        "projectName": "Infrastructure",
-        "projectPath": "c:\\dev\\my_projects\\url-shortener\\External\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\dev\\my_projects\\url-shortener\\Tests\\Unit.Tests\\Unit.Tests.csproj",
+        "projectName": "Unit.Tests",
+        "projectPath": "C:\\dev\\my_projects\\url-shortener\\Tests\\Unit.Tests\\Unit.Tests.csproj",
         "packagesPath": "C:\\Users\\mnia\\.nuget\\packages\\",
-        "outputPath": "c:\\dev\\my_projects\\url-shortener\\External\\Infrastructure\\obj\\",
+        "outputPath": "C:\\dev\\my_projects\\url-shortener\\Tests\\Unit.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,28 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.1.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

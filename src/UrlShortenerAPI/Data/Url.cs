@@ -1,9 +1,11 @@
-using Domain.Common;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Domain.Entities;
-public class Url : EntityBase
+namespace UrlShortenerAPI.Data;
+public class Url
 {
+    [BsonId]
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string Id { get; set; }
     [BsonElement("original_url")]
     public string OriginalUrl { get; set; }
     [BsonElement("hash")]

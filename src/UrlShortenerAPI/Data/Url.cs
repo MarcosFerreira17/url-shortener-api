@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Reflection.Metadata;
+using System.Security.Cryptography;
 using System.Text;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -32,5 +33,21 @@ public class Url
         Array.Copy(hash, 0, hashBytes, 2, 4);
 
         return Convert.ToBase64String(hashBytes);
+    }
+
+    public static bool CheckUrl(string Url)
+    {
+        if (string.IsNullOrEmpty(Url))
+            return false;
+
+        if (Uri.IsWellFormedUriString(Url, UriKind.RelativeOrAbsolute))
+        {
+            Uri l_strUri = new(Url);
+            return l_strUri.Scheme == Uri.UriSchemeHttp || l_strUri.Scheme == Uri.UriSchemeHttps;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

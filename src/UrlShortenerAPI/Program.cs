@@ -8,54 +8,40 @@ var app = builder.Build();
 /// <summary>
 /// 
 /// </summary>
-app.MapGet("/", () => "Urls API!");
+app.MapGet("/", () => "URL Shortener API is running!");
 
 /// <summary>
 /// Get all Urls
 /// </summary>
-app.MapGet("/api/Urls", async (UrlService UrlService) => await UrlService.Get());
+app.MapGet("/Url", async (UrlService UrlService) => await UrlService.Get());
 
 /// <summary>
-/// Get a Url by id
+/// Get a Url by hash
 /// </summary>
-app.MapGet("/api/Urls/{id}", async (UrlService UrlService, string id) =>
+app.MapGet("/Url/{hash}", async (UrlService urlService, string hash) =>
 {
-    var Url = await UrlService.Get(id);
-    return Url is null ? Results.NotFound() : Results.Ok(Url);
+    var Url = await urlService.Get(hash);
+    return Url is null ? Results.NotFound() : Results.Redirect(Url.OriginalUrl);
 });
 
 /// <summary>
 /// Create a new Url
 /// </summary>
-app.MapPost("/api/Urls", async (UrlService UrlService, Url Url) =>
+app.MapPost("/Url", async (UrlService urlService, Url Url) =>
 {
-    await UrlService.Create(Url);
+    await urlService.Create(Url);
     return Results.Ok();
-});
-
-/// <summary>
-/// Update a Url
-/// </summary>
-app.MapPut("/api/Urls/{id}", async (UrlService UrlService, string id, Url updatedUrl) =>
-{
-    var Url = await UrlService.Get(id);
-    if (Url is null) return Results.NotFound();
-
-    updatedUrl.Id = Url.Id;
-    await UrlService.Update(id, updatedUrl);
-
-    return Results.NoContent();
 });
 
 /// <summary>
 /// Delete a Url
 /// </summary>
-app.MapDelete("/api/Urls/{id}", async (UrlService UrlService, string id) =>
+app.MapDelete("/Url/{id}", async (UrlService urlService, string id) =>
 {
-    var Url = await UrlService.Get(id);
+    var Url = await urlService.Get(id);
     if (Url is null) return Results.NotFound();
 
-    await UrlService.Remove(Url.Id);
+    await urlService.Remove(Url.Id);
 
     return Results.NoContent();
 });

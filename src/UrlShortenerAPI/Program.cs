@@ -1,9 +1,12 @@
+using UrlShortenerAPI.Configurations;
 using UrlShortenerAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<UrlShortenerDatabaseSettings>(builder.Configuration.GetSection("UrlShortenerDatabaseSettings"));
 builder.Services.AddSingleton<UrlService>();
+builder.Services.ConfigureCors();
 var app = builder.Build();
+app.UseCors("CorsPolicy");
 
 /// <summary>
 /// 
@@ -27,11 +30,7 @@ app.MapGet("/Url/{hash}", async (UrlService urlService, string hash) =>
 /// <summary>
 /// Create a new Url
 /// </summary>
-app.MapPost("/Url", async (UrlService urlService, Url Url) =>
-{
-    await urlService.Create(Url);
-    return Results.Ok();
-});
+app.MapPost("/Url", async (UrlService urlService, Url Url) => Results.Ok(await urlService.Create(Url)));
 
 /// <summary>
 /// Delete a Url

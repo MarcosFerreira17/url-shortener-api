@@ -22,7 +22,7 @@ public class UrlService
     public async Task<Url> Get(string hash) =>
         await _Urls.Find(m => m.Hash == hash).FirstOrDefaultAsync();
 
-    public async Task Create(Url newEntity)
+    public async Task<string> Create(Url newEntity)
     {
         Url.CheckUrl(newEntity.OriginalUrl);
 
@@ -32,6 +32,7 @@ public class UrlService
             Hash = Url.GenerateHash(newEntity.OriginalUrl)
         };
         await _Urls.InsertOneAsync(url);
+        return "http://localhost:5003/url/" + url.Hash;
     }
     public async Task Remove(string id) =>
         await _Urls.DeleteOneAsync(m => m.Id == id);

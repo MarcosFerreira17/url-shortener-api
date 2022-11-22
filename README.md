@@ -1,8 +1,9 @@
 # URL Shortener
+##### Access [SPA project](https://github.com/MarcosFerreira17/url-shortener-spa)
 ![alt text for screen readers](/images/diagram.png "Diagram")
 ## About <a name = "about"></a>
 
-This a url shortener built with minimal API, Mongodb and [Angular]("https://github.com/MarcosFerreira17/url-shortener-spa").
+This a url shortener built with minimal API, Mongodb and [Angular](https://github.com/MarcosFerreira17/url-shortener-spa).
 
 ### Prerequisites
 

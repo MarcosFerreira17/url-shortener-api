@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  node:
+    container_name: webspa
+    user: "node"
+    working_dir: /UrlShortenerSPA
+    environment:
+      - NODE_ENV=Development
+    expose:
+      - "8001"
+    command: "npm start"
+  # mongo:
+  #   container_name: mongo
+  #   restart: always
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_data:/data/db
+  # urlshortener.api:
+  #   container_name: urlshortener.api
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - "UrlShortenerDatabaseSettings:ConnectionString=mongodb://mongodb:27017"
+  #   depends_on:
+  #     - mongo
+  #   ports:
+  #     - "8000:80"

@@ -2,7 +2,7 @@ using UrlShortenerAPI.Configurations;
 using UrlShortenerAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.Configure<UrlShortenerDatabaseSettings>(builder.Configuration.GetSection("UrlShortenerDatabaseSettings"));
+builder.Services.Configure<UrlShortenerDatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddSingleton<UrlService>();
 builder.Services.ConfigureCors();
 var app = builder.Build();

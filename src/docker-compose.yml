@@ -3,12 +3,12 @@ version: '3.4'
 services:
   node:
     image: node:latest
-  # mongo:
-  #   image: mongo
-#   urlshortener.api:
-#     image: ${DOCKER_REGISTRY-}urlshortener.api
-#     build:
-#       context: .
-#       dockerfile: UrlShortenerAPI/Dockerfile
-# volumes:
-#   mongo_data:
+  mongodb:
+    image: mongo
+  urlshortener.api:
+    image: ${DOCKER_REGISTRY-}urlshortener.api
+    build:
+      context: .
+      dockerfile: UrlShortenerAPI/Dockerfile
+volumes:
+  mongo_data:

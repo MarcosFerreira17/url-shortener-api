@@ -32,7 +32,7 @@ public class UrlService
             Hash = Url.GenerateHash(newEntity.OriginalUrl)
         };
         await _Urls.InsertOneAsync(url);
-        return "http://localhost:5003/url/" + url.Hash;
+        return "http://localhost:8000/url/" + url.Hash;
     }
     public async Task Remove(string id) =>
         await _Urls.DeleteOneAsync(m => m.Id == id);

@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-using System.Security.Cryptography;
-using System.Text;
+﻿using System.Security.Cryptography;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace UrlShortenerAPI.Data;
@@ -35,14 +33,14 @@ public class Url
         return Convert.ToBase64String(hashBytes);
     }
 
-    public static bool CheckUrl(string Url)
+    public static bool CheckUrl(string url)
     {
-        if (string.IsNullOrEmpty(Url))
+        if (string.IsNullOrEmpty(url))
             return false;
 
-        if (Uri.IsWellFormedUriString(Url, UriKind.RelativeOrAbsolute))
+        if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
         {
-            Uri l_strUri = new(Url);
+            Uri l_strUri = new(url);
             return l_strUri.Scheme == Uri.UriSchemeHttp || l_strUri.Scheme == Uri.UriSchemeHttps;
         }
         else

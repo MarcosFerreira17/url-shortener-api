@@ -4,7 +4,7 @@
 
 This a url shortener built with minimal api and angular.
 
-
+![alt text for screen readers](/images/linky.PNG "Angular spa").
 
 ### Prerequisites
 
@@ -13,7 +13,8 @@ What things you need to install the software and how to install them.
 ```
 - .NET 6
 - Angular 14.2.4. (Just in case you use the complete project with frontend)
-- MongoDb
+- Docker - Docker compose (optional, only if you must run entire application.)
+- Mongodb
 ```
 
 ### Installing
@@ -23,7 +24,11 @@ How to run the API:
 ```
 dotnet watch run
 ```
-
+#####   To run only the api you must configure mongodb first
+How to run the entire project:
+```
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up
+```
 For the API to work correctly the database must already be running.
 ## Minimal API .NET 6
 The new .NET 6.0 feature - Minimal APIs - for ASP .NET Core 6 allows you to create APIs with minimal dependency on the WebAPI framework and minimal code and files required for minimalist API development.

@@ -1,10 +1,8 @@
 # URL Shortener
-
+![alt text for screen readers](/images/diagram.png "Diagram")
 ## About <a name = "about"></a>
 
 This a url shortener built with minimal api and angular.
-
-![alt text for screen readers](/images/linky.PNG "Angular spa").
 
 ### Prerequisites
 
@@ -46,3 +44,5 @@ Be Scalable, ensuring that your application can grow if necessary;
 
 ## MongoDB
 MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas. MongoDB is developed by MongoDB Inc. and licensed under the Server Side Public License which is deemed non-free by several distributions.
+
+![alt text for screen readers](/images/linky.PNG "Angular spa")

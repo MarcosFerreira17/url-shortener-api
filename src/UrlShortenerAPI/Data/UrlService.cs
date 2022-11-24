@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -6,21 +5,20 @@ namespace UrlShortenerAPI.Data;
 
 public class UrlService
 {
-    private readonly IMongoCollection<Url> _Urls;
-
+    private readonly IMongoCollection<Url> _urls;
     public UrlService(IOptions<UrlShortenerDatabaseSettings> options)
     {
         var mongoClient = new MongoClient(options.Value.ConnectionString);
 
-        _Urls = mongoClient.GetDatabase(options.Value.DatabaseName)
+        _urls = mongoClient.GetDatabase(options.Value.DatabaseName)
             .GetCollection<Url>(options.Value.UrlsCollectionName);
     }
 
     public async Task<List<Url>> Get() =>
-        await _Urls.Find(_ => true).ToListAsync();
+        await _urls.Find(_ => true).ToListAsync();
 
     public async Task<Url> Get(string hash) =>
-        await _Urls.Find(m => m.Hash == hash).FirstOrDefaultAsync();
+        await _urls.Find(m => m.Hash == hash).FirstOrDefaultAsync();
 
     public async Task<string> Create(Url newEntity)
     {
@@ -31,9 +29,9 @@ public class UrlService
             OriginalUrl = newEntity.OriginalUrl,
             Hash = Url.GenerateHash(newEntity.OriginalUrl)
         };
-        await _Urls.InsertOneAsync(url);
+        await _urls.InsertOneAsync(url);
         return "http://localhost:8000/url/" + url.Hash;
     }
     public async Task Remove(string id) =>
-        await _Urls.DeleteOneAsync(m => m.Id == id);
+        await _urls.DeleteOneAsync(m => m.Id == id);
 }

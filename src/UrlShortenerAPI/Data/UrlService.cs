@@ -22,7 +22,8 @@ public class UrlService
 
     public async Task<string> Create(Url newEntity)
     {
-        Url.CheckUrl(newEntity.OriginalUrl);
+        if (!Url.CheckUrl(newEntity.OriginalUrl))
+            throw new Exception($"Url não válido: {newEntity}");
 
         Url url = new()
         {

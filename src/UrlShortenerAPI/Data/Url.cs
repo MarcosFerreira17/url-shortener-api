@@ -38,14 +38,10 @@ public class Url
         if (string.IsNullOrEmpty(url))
             return false;
 
-        if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
-        {
-            Uri l_strUri = new(url);
-            return l_strUri.Scheme == Uri.UriSchemeHttp || l_strUri.Scheme == Uri.UriSchemeHttps;
-        }
-        else
-        {
-            return false;
-        }
+        Uri uriResult;
+        bool result = Uri.TryCreate(url, UriKind.Absolute, out uriResult)
+            && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+        return result;
     }
 }

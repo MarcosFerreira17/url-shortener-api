@@ -9,6 +9,6 @@ services:
     image: ${DOCKER_REGISTRY-}urlshortener.api
     build:
       context: .
-      dockerfile: UrlShortenerAPI/Dockerfile
+      dockerfile: url-shortener-api/Dockerfile
 volumes:
   mongo_data:

@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["UrlShortenerAPI/UrlShortenerAPI.csproj", "UrlShortenerAPI/"]
-RUN dotnet restore "UrlShortenerAPI/UrlShortenerAPI.csproj"
+COPY ["url-shortener-api/UrlShortenerAPI.csproj", "UrlShortenerAPI/"]
+RUN dotnet restore "url-shortener-api/UrlShortenerAPI.csproj"
 COPY . .
-WORKDIR "/src/UrlShortenerAPI"
+WORKDIR "/src/url-shortener-api"
 RUN dotnet build "UrlShortenerAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish

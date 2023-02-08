@@ -3,9 +3,9 @@ version: '3.4'
 services:
   node:
       container_name: angular.spa  # Container name
-      build: ./UrlShortenerSPA # Location of our Dockerfile
+      build: ./url-shortener-spa # Location of our Dockerfile
       volumes: # Volume binding
-        - './UrlShortenerSPA:/usr/src/app' 
+        - './url-shortener-spa:/usr/src/app' 
       ports: 
         - '4200:4200' # Port mapping
       command: > 

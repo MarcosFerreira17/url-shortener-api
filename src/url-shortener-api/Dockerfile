@@ -4,7 +4,7 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY UrlShortenerAPI.csproj ./
 RUN dotnet restore
-
+RUN dotnet dev-certs https --trust
 # Copy everything else and build
 COPY . ./
 RUN dotnet publish -c Release -o out

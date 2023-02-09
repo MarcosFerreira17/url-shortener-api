@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  node:
+      container_name: angular.spa  # Container name
+      build: ./url-shortener-spa # Location of our Dockerfile
+      volumes: # Volume binding
+        - './url-shortener-spa:/usr/src/app' 
+      ports: 
+        - '4200:4200' # Port mapping
+      command: > 
+        bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+  mongodb:
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+  urlshortener.api:
+    container_name: urlshortener.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://mongodb:27017"
+    depends_on:
+      - mongodb
+    ports:
+      - "8000:80"

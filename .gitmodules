@@ -1,0 +1,3 @@
+[submodule "src/url-shortener-spa"]
+	path = src/url-shortener-spa
+	url = https://github.com/MarcosFerreira17/url-shortener-spa.git

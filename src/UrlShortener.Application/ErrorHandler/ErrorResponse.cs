@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace UrlShortener.Domain.ErrorHandler;
+namespace UrlShortener.Application.ErrorHandler;
 
 public class ErrorResponse
 {

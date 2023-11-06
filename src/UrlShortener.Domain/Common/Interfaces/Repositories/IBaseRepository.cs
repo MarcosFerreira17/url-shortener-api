@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace UrlShortener.Infra.Repositories.Interfaces;
+namespace UrlShortener.Domain.Common.Interfaces.Repositories;
 
 public interface IBaseRepository<TEntity> where TEntity : class
 {

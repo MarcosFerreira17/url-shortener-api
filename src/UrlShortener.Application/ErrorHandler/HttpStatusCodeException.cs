@@ -1,7 +1,6 @@
-using System;
 using System.Net;
 
-namespace UrlShortener.Domain.ErrorHandler;
+namespace UrlShortener.Application.ErrorHandler;
 public class HttpStatusCodeException : Exception
 {
     public HttpStatusCode HttpStatusCode { get; set; }

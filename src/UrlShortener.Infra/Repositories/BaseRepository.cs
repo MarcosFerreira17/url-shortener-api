@@ -1,24 +1,23 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
+using UrlShortener.Domain.Common.Interfaces.Repositories;
 using UrlShortener.Infra.Configurations;
-using UrlShortener.Infra.Repositories.Interfaces;
 
 namespace UrlShortener.Infra.Repositories;
 public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
 {
     private readonly IMongoCollection<TEntity> _collection;
-    public BaseRepository(IOptions<DatabaseSettings> databaseSettings)
+
+    public BaseRepository(IOptions<MongoSettings> databaseSettings)
     {
         var mongoClient = new MongoClient(
-        databaseSettings.Value.ConnectionString);
+        databaseSettings.Value.ConnectionString) ?? throw new ArgumentNullException(nameof(databaseSettings));
 
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.DatabaseName);
-
-        _collection = mongoDatabase.GetCollection<TEntity>(
-            databaseSettings.Value.CollectionName);
+        _collection = mongoClient.GetDatabase(
+            databaseSettings.Value.DatabaseName).GetCollection<TEntity>(
+            databaseSettings.Value.CollectionName) ?? throw new ArgumentNullException(nameof(databaseSettings));
     }
 
     public virtual async Task DeleteOneAsync(string id)

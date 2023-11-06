@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Domain", "UrlS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Infra", "UrlShortener.Infra\UrlShortener.Infra.csproj", "{DDECB844-BA12-4644-8A23-DD1C5D5DDCE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Application", "UrlShortener.Application\UrlShortener.Application.csproj", "{B1F69A30-4907-4EAF-927A-7D140A3C76B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{DDECB844-BA12-4644-8A23-DD1C5D5DDCE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDECB844-BA12-4644-8A23-DD1C5D5DDCE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDECB844-BA12-4644-8A23-DD1C5D5DDCE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F69A30-4907-4EAF-927A-7D140A3C76B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F69A30-4907-4EAF-927A-7D140A3C76B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F69A30-4907-4EAF-927A-7D140A3C76B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F69A30-4907-4EAF-927A-7D140A3C76B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

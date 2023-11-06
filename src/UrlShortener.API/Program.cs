@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using UrlShortener.API.Configurations;
-using UrlShortener.API.Middlewares;
+using UrlShortener.Application;
+using UrlShortener.Application.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerConfig();
 
-builder.Services.AddApplicationServicesConfig();
+builder.Services.InjectApplicationDependencies();
+
+builder.Services.InjectInfraDependencies(builder.Configuration);
 
 var app = builder.Build();
 

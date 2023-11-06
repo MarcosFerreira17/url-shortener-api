@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
@@ -15,8 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\UrlShortener.Infra\UrlShortener.Infra.csproj"/>
-        <ProjectReference Include="..\UrlShortener.Domain\UrlShortener.Domain.csproj"/>
+        <ProjectReference Include="..\UrlShortener.Application\UrlShortener.Application.csproj"/>
     </ItemGroup>
 
 </Project>

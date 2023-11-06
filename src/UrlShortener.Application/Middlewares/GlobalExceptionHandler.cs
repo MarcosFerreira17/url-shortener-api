@@ -1,7 +1,8 @@
 using System.Net;
-using UrlShortener.Domain.ErrorHandler;
+using Microsoft.AspNetCore.Http;
+using UrlShortener.Application.ErrorHandler;
 
-namespace UrlShortener.API.Middlewares;
+namespace UrlShortener.Application.Middlewares;
 
 public class GlobalExceptionHandler
 {

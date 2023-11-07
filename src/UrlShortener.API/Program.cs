@@ -15,7 +15,11 @@ builder.Services.InjectApplicationDependencies();
 
 builder.Services.InjectInfraDependencies(builder.Configuration);
 
+builder.Services.ConfigureCors();
+
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 app.UseMiddleware<GlobalExceptionHandler>();
 

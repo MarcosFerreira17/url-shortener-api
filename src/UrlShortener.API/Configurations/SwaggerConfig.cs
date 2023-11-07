@@ -12,9 +12,9 @@ public static class SwaggerConfig
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "UrlShortener.API",
+                Title = "URL Shortener API",
                 Version = "v1",
-                Description = "API de UrlShortener",
+                Description = "An API for shortening and expanding URLs",
                 Contact = new OpenApiContact
                 {
                     Name = "Marcos Ferreira",

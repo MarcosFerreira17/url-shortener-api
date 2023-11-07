@@ -1,38 +1,51 @@
 using Microsoft.AspNetCore.Mvc;
+using UrlShortener.Application.DTO;
 using UrlShortener.Application.Interfaces;
 
 namespace UrlShortener.API.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
 public class UrlShortenerController : ControllerBase
 {
-    private readonly ILogger<UrlShortenerController> _logger;
     private readonly IUrlService _urlService;
-    public UrlShortenerController(ILogger<UrlShortenerController> logger, IUrlService urlService)
+    public UrlShortenerController(IUrlService urlService)
     {
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _urlService = urlService ?? throw new ArgumentNullException(nameof(urlService));
     }
 
+    /// <summary>
+    /// Get the original url
+    /// </summary>
+    /// <param name="hash"></param>
+    /// <returns>Redirect</returns>
     [HttpGet]
-    [Route("{urlId}")]
-    public async Task Get(string urlId)
+    [Route("{hash}")]
+    [ProducesResponseType(StatusCodes.Status302Found)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Get([FromRoute] string hash)
     {
-        var result = await _urlService.GetUrlAsync(urlId); ;
+        string result = await _urlService.GetUrlAsync(hash);
 
-        var url = $"http://localhost:5003/url/{result}";
-
-        Results.Redirect(url);
+        return result is null ?
+                        NotFound() :
+                        Redirect(result);
     }
 
+    /// <summary>
+    /// Create a short url
+    /// </summary>
+    /// <param name="urlDTO">Url to be shortened</param>
+    /// <returns>Shortened url</returns>
     [HttpPost]
-    [Route("shorten")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [Route("api/v1/[controller]/shorten")]
+    [ProducesResponseType(200, Type = typeof(ShortUrlDTO))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult Post([FromBody] string longUrl)
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Post([FromBody] UrlDTO urlDTO)
     {
-        return Ok("Hello World!");
+        return Ok(await _urlService.CreateShortUrlAsync(urlDTO));
     }
 
 }

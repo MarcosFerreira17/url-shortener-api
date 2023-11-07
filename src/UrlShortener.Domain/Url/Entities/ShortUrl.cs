@@ -3,14 +3,14 @@ using System.Security.Cryptography;
 using System.Text;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using UrlShortener.Domain.Common;
 using UrlShortener.Domain.Common.CustomExceptions;
 
 namespace UrlShortener.Domain.Url.Entities;
-public class ShortUrl : BaseEntity
+public class ShortUrl
 {
-    public ShortUrl(DateTime createdAt, string longUrlText) : base(createdAt)
+    public ShortUrl(DateTime createdAt, string longUrlText)
     {
+        CreatedAt = createdAt;
         LongUrlText = longUrlText;
         Text = CreateShortUrl(longUrlText);
     }
@@ -19,6 +19,7 @@ public class ShortUrl : BaseEntity
     [BsonElement("ShortUrlId")]
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; private set; }
+    public DateTime CreatedAt { get; private set; }
     [BsonElement("ShortUrlText")]
     public string LongUrlText { get; private set; }
     public string Text { get; private set; }

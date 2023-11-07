@@ -1,6 +1,8 @@
+using UrlShortener.Application.DTO;
+
 namespace UrlShortener.Application.Interfaces;
 public interface IUrlService
 {
-    Task<string> CreateShortUrlAsync(string url);
-    Task<string> GetUrlAsync(string shortUrl);
+    Task<ShortUrlDTO> CreateShortUrlAsync(UrlDTO url);
+    Task<string> GetUrlAsync(string hash);
 }

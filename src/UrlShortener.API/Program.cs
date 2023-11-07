@@ -19,7 +19,7 @@ builder.Services.ConfigureCors();
 
 var app = builder.Build();
 
-app.UseCors("CorsPolicy");
+app.UseCors("FreeCorsPolicy");
 
 app.UseMiddleware<GlobalExceptionHandler>();
 

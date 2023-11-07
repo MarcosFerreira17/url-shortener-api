@@ -31,6 +31,25 @@ services:
       - mongodb
     networks:
       - mongo-compose-network
+  
+  urlshortener_api:
+    image: ${DOCKER_REGISTRY-}urlshortenerapi
+    build:
+      context: .
+      dockerfile: src/UrlShortener.API/Dockerfile
+    container_name: urlshortener_api
+    depends_on:
+      - mongodb
+    ports:
+      - 8080:80
+      - 443:443
+    restart: always
+    environment:
+      - DBHOST=mongodb
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URL=http://+:80
+    networks:
+      - mongo-compose-network
 
 volumes:
   mongodb_data:

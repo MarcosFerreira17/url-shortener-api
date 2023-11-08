@@ -32,6 +32,15 @@ services:
     networks:
       - mongo-compose-network
   
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
+  
   urlshortener_api:
     image: ${DOCKER_REGISTRY-}urlshortenerapi
     build:
@@ -40,6 +49,7 @@ services:
     container_name: urlshortener_api
     depends_on:
       - mongodb
+      - cache
     ports:
       - 8080:80
       - 443:443
@@ -48,11 +58,19 @@ services:
       - DBHOST=mongodb
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URL=http://+:80
+      - REDIS_HOST= cache
+      - REDIS_PORT= 6379
+      - REDIS_PASSWORD= eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    links:
+      - mongodb
+      - cache
     networks:
       - mongo-compose-network
 
 volumes:
   mongodb_data:
+  cache:
+    driver: local
 
 networks:
   mongo-compose-network:

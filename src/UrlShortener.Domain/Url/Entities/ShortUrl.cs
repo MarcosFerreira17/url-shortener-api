@@ -8,6 +8,7 @@ using UrlShortener.Domain.Common.CustomExceptions;
 namespace UrlShortener.Domain.Url.Entities;
 public class ShortUrl
 {
+    public ShortUrl() { }
     public ShortUrl(DateTime createdAt, string longUrlText)
     {
         CreatedAt = createdAt;

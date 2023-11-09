@@ -18,6 +18,7 @@ services:
 
   mongo-express:
     image: mongo-express
+    container_name: mongo-express
     ports:
       - 8081:8081
     environment:
@@ -34,6 +35,7 @@ services:
   
   cache:
     image: redis:6.2-alpine
+    container_name: cache
     restart: always
     ports:
       - '6379:6379'
@@ -43,10 +45,10 @@ services:
   
   urlshortener_api:
     image: ${DOCKER_REGISTRY-}urlshortenerapi
+    container_name: urlshortener_api
     build:
       context: .
       dockerfile: src/UrlShortener.API/Dockerfile
-    container_name: urlshortener_api
     depends_on:
       - mongodb
       - cache

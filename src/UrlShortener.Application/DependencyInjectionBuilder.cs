@@ -24,6 +24,8 @@ public static class DependencyInjectionBuilder
             options.InstanceName = "Sample_";
         });
 
+        services.AddSingleton<ICacheService, CacheService>();
+
         services.AddSingleton<IUrlRepository, UrlRepository>();
     }
 }

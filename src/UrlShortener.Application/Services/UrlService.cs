@@ -14,8 +14,8 @@ public class UrlService : IUrlService
 {
     private readonly IUrlRepository _urlRepository;
     private readonly ILogger<UrlService> _logger;
-    private readonly IDistributedCache _cache;
-    public UrlService(IUrlRepository urlRepository, ILogger<UrlService> logger, IDistributedCache cache)
+    private readonly ICacheService _cache;
+    public UrlService(IUrlRepository urlRepository, ILogger<UrlService> logger, ICacheService cache)
     {
         _urlRepository = urlRepository ?? throw new ArgumentNullException(nameof(urlRepository));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -40,41 +40,24 @@ public class UrlService : IUrlService
 
     public async Task<string> GetUrlAsync(string hash)
     {
-        var cacheKey = "shortUrl";
+        FilterDefinition<ShortUrl> filter = Builders<ShortUrl>.Filter.Eq(x => x.Text, hash);
 
-        ShortUrl urlShort = new();
+        ShortUrl shortUrl = null;
 
-        var redisShortUrl = await _cache.GetAsync(cacheKey);
-
-        string serializedShortUrl;
-
-        if (redisShortUrl is not null)
+        try
         {
-            serializedShortUrl = Encoding.UTF8.GetString(redisShortUrl);
-
-            ShortUrl urlDeserialize = JsonConvert.DeserializeObject<ShortUrl>(serializedShortUrl);
-
-            return urlDeserialize.LongUrlText;
+            await _cache.GetOrSetAsync("shortUrl", async ()
+                                                => shortUrl = await _urlRepository.GetByFilterAsync(filter));
         }
-        else
+        catch (Exception ex)
         {
-            FilterDefinition<ShortUrl> filter = Builders<ShortUrl>.Filter.Eq(x => x.Text, hash);
-
-            ShortUrl shortUrl = await _urlRepository.GetByFilterAsync(filter);
-
-            serializedShortUrl = JsonConvert.SerializeObject(shortUrl);
-
-            redisShortUrl = Encoding.UTF8.GetBytes(serializedShortUrl);
-
-            var options = new DistributedCacheEntryOptions().SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
-                                                            .SetSlidingExpiration(TimeSpan.FromMinutes(2));
-
-            await _cache.SetAsync(cacheKey, redisShortUrl, options); ;
-
-            if (shortUrl is null)
-                return null;
-
-            return shortUrl.LongUrlText;
+            _logger.LogError(ex, "Error while trying to get url from cache.");
+            shortUrl = await _urlRepository.GetByFilterAsync(filter);
         }
+
+        if (shortUrl is null)
+            return null;
+
+        return shortUrl.LongUrlText;
     }
 }

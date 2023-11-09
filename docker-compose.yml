@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "8083:8000"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+  
   mongodb:
     image: mongo:latest
     container_name: mongodb
@@ -14,7 +25,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     networks:
-      - mongo-compose-network
+      - compose-network
 
   mongo-express:
     image: mongo-express
@@ -31,7 +42,7 @@ services:
     links:
       - mongodb
     networks:
-      - mongo-compose-network
+      - compose-network
   
   cache:
     image: redis:6.2-alpine
@@ -42,6 +53,8 @@ services:
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes: 
       - cache:/data
+    networks:
+      - compose-network
   
   urlshortener_api:
     image: ${DOCKER_REGISTRY-}urlshortenerapi
@@ -67,13 +80,14 @@ services:
       - mongodb
       - cache
     networks:
-      - mongo-compose-network
+      - compose-network
 
 volumes:
   mongodb_data:
+  portainer_data:
   cache:
     driver: local
 
 networks:
-  mongo-compose-network:
+  compose-network:
     driver: bridge

@@ -44,16 +44,7 @@ public class UrlService : IUrlService
 
         ShortUrl shortUrl = null;
 
-        try
-        {
-            await _cache.GetOrSetAsync("shortUrl", async ()
-                                                => shortUrl = await _urlRepository.GetByFilterAsync(filter));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error while trying to get url from cache.");
-            shortUrl = await _urlRepository.GetByFilterAsync(filter);
-        }
+        shortUrl = await _cache.GetOrSetInMemory(hash, async () => shortUrl = await _urlRepository.GetByFilterAsync(filter));
 
         if (shortUrl is null)
             return null;

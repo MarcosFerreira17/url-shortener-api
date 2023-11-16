@@ -1,6 +1,7 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using UrlShortener.Domain.Common.CustomExceptions;
@@ -8,7 +9,14 @@ using UrlShortener.Domain.Common.CustomExceptions;
 namespace UrlShortener.Domain.Url.Entities;
 public class ShortUrl
 {
-    public ShortUrl() { }
+    [JsonConstructor]
+    public ShortUrl(string id, DateTime createdAt, string longUrlText, string text)
+    {
+        Id = id;
+        CreatedAt = createdAt;
+        LongUrlText = longUrlText;
+        Text = text;
+    }
     public ShortUrl(DateTime createdAt, string longUrlText)
     {
         CreatedAt = createdAt;

@@ -1,5 +1,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using UrlShortener.Application.ErrorHandler;
 
 namespace UrlShortener.Application.Middlewares;
@@ -7,9 +8,11 @@ namespace UrlShortener.Application.Middlewares;
 public class GlobalExceptionHandler
 {
     private readonly RequestDelegate _next;
+    private readonly ILogger<GlobalExceptionHandler> _logger;
 
-    public GlobalExceptionHandler(RequestDelegate next)
+    public GlobalExceptionHandler(RequestDelegate next, ILogger<GlobalExceptionHandler> logger)
     {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _next = next;
     }
 
@@ -19,12 +22,22 @@ public class GlobalExceptionHandler
         {
             await _next(context);
         }
+        catch (TimeoutException ex)
+        {
+            _logger.LogError(ex, "An error ocurred while trying to access database.");
+            await HandleExceptionAsync(context, ex);
+        }
+        catch (HttpStatusCodeException ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            await HandleExceptionAsync(context, ex);
+        }
         catch (Exception ex)
         {
+            _logger.LogError(ex, ex.Message);
             await HandleExceptionAsync(context, ex);
         }
     }
-
     private static Task HandleExceptionAsync(HttpContext context, HttpStatusCodeException exception)
     {
         var result = new ErrorResponse

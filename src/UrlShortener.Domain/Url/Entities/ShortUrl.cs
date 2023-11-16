@@ -10,18 +10,18 @@ namespace UrlShortener.Domain.Url.Entities;
 public class ShortUrl
 {
     [JsonConstructor]
-    public ShortUrl(string id, DateTime createdAt, string longUrlText, string text)
+    private ShortUrl(string id, DateTime createdAt, string longUrlText, string text)
     {
         Id = id;
         CreatedAt = createdAt;
-        LongUrlText = longUrlText;
-        Text = text;
+        LongUrl = longUrlText;
+        Hash = text;
     }
-    public ShortUrl(DateTime createdAt, string longUrlText)
+    public ShortUrl(DateTime createdAt, string longUrl)
     {
         CreatedAt = createdAt;
-        LongUrlText = longUrlText;
-        Text = CreateShortUrl(longUrlText);
+        LongUrl = longUrl;
+        Hash = CreateHash(longUrl);
     }
 
     [BsonId]
@@ -29,11 +29,11 @@ public class ShortUrl
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; private set; }
     public DateTime CreatedAt { get; private set; }
-    [BsonElement("ShortUrlText")]
-    public string LongUrlText { get; private set; }
-    public string Text { get; private set; }
+    public string LongUrl { get; private set; }
+    public string Hash { get; private set; }
+    public DateTime LastAccessedAt { get; private set; }
 
-    private string CreateShortUrl(string longUrlText)
+    private string CreateHash(string longUrlText)
     {
         if (!IsValidUrl(longUrlText))
             throw new DomainLogicException(ErrorConstants.UrlIdIsNotValidUrl);
@@ -67,5 +67,12 @@ public class ShortUrl
 
         return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)
             && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+    }
+
+    public static ShortUrl UpdateLastAccessedAt(ShortUrl shortUrl)
+    {
+        shortUrl.LastAccessedAt = DateTime.UtcNow;
+
+        return shortUrl;
     }
 }

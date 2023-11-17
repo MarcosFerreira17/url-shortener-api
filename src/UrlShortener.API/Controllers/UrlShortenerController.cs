@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Application.DTO;
+using UrlShortener.Application.Helpers;
 using UrlShortener.Application.Interfaces;
 
 namespace UrlShortener.API.Controllers;
@@ -26,6 +27,8 @@ public class UrlShortenerController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get([FromRoute] string hash)
     {
+        string ip = IpAddress.GetIpAddress(HttpContext);
+
         string result = await _urlService.GetUrlAsync(hash);
 
         return result is null ?

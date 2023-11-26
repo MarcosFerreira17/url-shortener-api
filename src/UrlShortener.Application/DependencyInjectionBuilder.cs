@@ -1,6 +1,8 @@
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UrlShortener.Application.Interfaces;
+using UrlShortener.Application.Mapping;
 using UrlShortener.Application.Services;
 using UrlShortener.Application.Settings;
 using UrlShortener.Domain.Url.Repositories.Interfaces;
@@ -12,6 +14,8 @@ public static class DependencyInjectionBuilder
 {
     public static void InjectApplicationDependencies(this IServiceCollection services)
     {
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddScoped<IUrlAccessTraceService, UrlAccessTraceService>();
         services.AddScoped<IUrlService, UrlService>();
         services.AddScoped<ICacheService, CacheService>();
         services.AddHttpClient<IIpStackService, IpStackService>();

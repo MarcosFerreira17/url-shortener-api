@@ -3,5 +3,5 @@ using UrlShortener.Application.DTO.IpStack;
 namespace UrlShortener.Application.Interfaces;
 public interface IIpStackService
 {
-    Task<LocationInfoDTO> GetCountryByIp(string ip);
+    Task<LocationInfoDTO> GetCountryByIpAsync(string ip);
 }

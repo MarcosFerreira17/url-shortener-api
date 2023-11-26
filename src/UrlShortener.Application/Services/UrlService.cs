@@ -1,8 +1,5 @@
-using System.Text;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
-using Newtonsoft.Json;
 using UrlShortener.Application.DTO;
 using UrlShortener.Application.Helpers;
 using UrlShortener.Application.Interfaces;

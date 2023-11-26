@@ -11,14 +11,13 @@ public class IpStackService : IIpStackService
     private readonly HttpClient _httpClient;
     private readonly IpStackSettings _ipStackSettings;
 
-
     public IpStackService(IOptions<IpStackSettings> ipStackSettings, HttpClient httpClient)
     {
         _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         _ipStackSettings = ipStackSettings.Value ?? throw new ArgumentNullException(nameof(ipStackSettings)); ;
     }
 
-    public async Task<LocationInfoDTO> GetCountryByIp(string ip)
+    public async Task<LocationInfoDTO> GetCountryByIpAsync(string ip)
     {
         var response = await _httpClient.GetAsync($"{_ipStackSettings.Url}/{ip}?access_key={_ipStackSettings.AccessKey}");
 
